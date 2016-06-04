@@ -1,6 +1,8 @@
 
 plugins {
+    id "java"
     id "com.athaydes.osgi-run" version "1.5.0"
+    id "org.dm.bundle" version "0.8.4" // 1
 }
 
 group 'osgi-run-tutorial'
@@ -8,5 +10,18 @@ version '1.0'
 
 repositories {
     jcenter()
+}
+
+dependencies {
+    compile "org.osgi:org.osgi.service.component.annotations:1.3.0" // 2
+    osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2' // 3
+}
+
+runOsgi {
+    bundles += project // 4
+}
+
+bundle {
+    instruction '-dsannotations', '*' // 5
 }
 
