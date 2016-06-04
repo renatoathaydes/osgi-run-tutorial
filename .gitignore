@@ -1,0 +1,8 @@
+.gradle
+build/
+!gradle-wrapper.jar
+
+generated-sources/
+
+.idea/
+*.iml
