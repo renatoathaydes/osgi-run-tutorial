@@ -1,3 +1,4 @@
+
 plugins {
     id "com.athaydes.osgi-run" version "1.5.0"
 }
@@ -5,8 +6,7 @@ plugins {
 group 'osgi-run-tutorial'
 version '1.0'
 
-sourceCompatibility = 1.8
-
 repositories {
     jcenter()
 }
+
