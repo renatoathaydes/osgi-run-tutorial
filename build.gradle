@@ -16,11 +16,24 @@ dependencies {
 
     compile 'com.github.fedy2:yahoo-weather-java-api:2.0.0'
 
-    osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2'
+    osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2', {
+        transitive = false
+    }
+
 }
 
 runOsgi {
     bundles += project
+
+    wrapInstructions {
+        // use regex to match file name of dependency
+        manifest( "yahoo-weather-java-api.*" ) {
+            // export everything except the binding package and sub-packages
+            instruction 'Export-Package', '!com.github.fedy2.weather.binding*', '*'
+            instruction 'Bundle-Description', 'The Yahoo Weather Java API is used to provide weather data.'
+        }
+    }
+
 }
 
 bundle {
