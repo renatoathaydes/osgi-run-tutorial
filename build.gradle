@@ -2,7 +2,7 @@
 plugins {
     id "java"
     id "com.athaydes.osgi-run" version "1.5.0"
-    id "org.dm.bundle" version "0.8.4" // 1
+    id "org.dm.bundle" version "0.8.4"
 }
 
 group 'osgi-run-tutorial'
@@ -13,15 +13,18 @@ repositories {
 }
 
 dependencies {
-    compile "org.osgi:org.osgi.service.component.annotations:1.3.0" // 2
-    osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2' // 3
+    compile "org.osgi:org.osgi.service.component.annotations:1.3.0"
+
+    compile "com.google.guava:guava:19.0"
+
+    osgiRuntime 'org.apache.felix:org.apache.felix.scr:2.0.2'
 }
 
 runOsgi {
-    bundles += project // 4
+    bundles += project
 }
 
 bundle {
-    instruction '-dsannotations', '*' // 5
+    instruction '-dsannotations', '*'
 }
 

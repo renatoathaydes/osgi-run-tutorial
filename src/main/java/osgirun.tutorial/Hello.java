@@ -1,6 +1,7 @@
 
 package osgirun.tutorial;
 
+import com.google.common.collect.ImmutableList;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
@@ -9,7 +10,7 @@ public class Hello {
 
     @Activate
     public void start() {
-        System.out.println( "Hello osgi-run" );
+        System.out.println( "Hello osgi-run " + ImmutableList.of( 'J', 'A', 'V', 'A' ) );
     }
 
 }
