@@ -1,7 +1,9 @@
 
 package osgirun.tutorial;
 
-import com.google.common.collect.ImmutableList;
+import com.github.fedy2.weather.YahooWeatherService;
+import com.github.fedy2.weather.data.Channel;
+import com.github.fedy2.weather.data.unit.DegreeUnit;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
@@ -10,7 +12,19 @@ public class Hello {
 
     @Activate
     public void start() {
-        System.out.println( "Hello osgi-run " + ImmutableList.of( 'J', 'A', 'V', 'A' ) );
+        try {
+            YahooWeatherService service = new YahooWeatherService();
+            Channel channel = service.getForecastForLocation( "Stockholm, Sweden", DegreeUnit.CELSIUS )
+                    .first( 1 ).get( 0 );
+
+            int temperature = channel.getItem().getCondition().getTemp();
+            String conditions = channel.getItem().getCondition().getText();
+
+            System.out.println( "Weather in Stockholm now: " +
+                    temperature + "C, " + conditions );
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
     }
 
 }
